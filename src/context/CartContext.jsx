@@ -14,13 +14,36 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
-    setCartItems(prev => [...prev, product]);
+    setCartItems(prev => {
+      const existing = prev.find(item => item.id === product.id);
+      if (existing) {
+        return prev.map(item => 
+          item.id === product.id 
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prev, { ...product, quantity: 1 }];
+    });
   };
 
-  const getCartCount = () => cartItems.length;
+  const removeFromCart = (productId) => {
+    setCartItems(prev => {
+      return prev.map(item => {
+        if (item.id === productId) {
+          return item.quantity > 1 
+            ? { ...item, quantity: item.quantity - 1 }
+            : null;
+        }
+        return item;
+      }).filter(Boolean);
+    });
+  };
+
+  const getCartCount = () => cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, getCartCount }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, getCartCount }}>
       {children}
     </CartContext.Provider>
   );

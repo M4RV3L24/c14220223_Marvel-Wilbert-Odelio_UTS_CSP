@@ -1,7 +1,7 @@
 import { useCart } from '../context/CartContext';
 
 const Cart = () => {
-  const { cartItems } = useCart();
+  const { cartItems, removeFromCart } = useCart();
 
   return (
     <div>
@@ -10,11 +10,18 @@ const Cart = () => {
         <p className="text-center text-gray-500">Your cart is empty</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {cartItems.map((item, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md p-4">
+          {cartItems.map((item) => (
+            <div key={item.id} className="bg-white rounded-lg shadow-md p-4 flex flex-col h-full">
               <img src={item.image} alt={item.title} className="w-full h-48 object-contain mb-4" />
               <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-              <p className="text-xl font-bold text-green-600">${item.price}</p>
+              <p className="text-lg mb-2">Quantity: {item.quantity}</p>
+              <p className="text-xl font-bold text-green-600 mb-4">Total: ${(item.price * item.quantity).toFixed(2)}</p>
+              <button 
+                onClick={() => removeFromCart(item.id)}
+                className="w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 mt-auto"
+              >
+                Remove from Cart
+              </button>
             </div>
           ))}
         </div>
