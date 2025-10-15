@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
+import ProductTitle from './ProductTitle';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -19,6 +19,8 @@ const Home = () => {
     fetchProducts();
   }, []);
 
+  if (products.length === 0) return <div className="text-center">Loading...</div>;
+
   return (
     <div>
       <h1 className="text-3xl font-bold text-center mb-8">Beauty and Luxury's Products</h1>
@@ -26,13 +28,12 @@ const Home = () => {
         {products.map(product => (
           <div key={product.id} className="bg-white rounded-lg shadow-md p-4 flex flex-col h-full">
             <img src={product.image} alt={product.title} className="w-full h-48 object-contain mb-4" />
-            <Link to={`/product/${product.id}`} className="text-lg font-semibold text-blue-600 hover:text-blue-800 block mb-2">
-              {product.title}
-            </Link>
+            <ProductTitle product={product} />
             <p className="text-xl font-bold text-green-600 mb-4">${product.price}</p>
             <button 
               onClick={() => addToCart(product)}
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mt-auto"
+              // className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mt-auto shadow-blue-3 transition duration-150 ease-in-out"
+              className="inline-block rounded bg-blue px-6 pb-2 pt-2.5 mt-auto text-xs font-medium uppercase leading-normal text-white bg-blue-500 shadow-blue-3 transition duration-150 ease-in-out hover:bg-blue-accent-300 hover:shadow-blue-2 focus:bg-blue-accent-300 focus:shadow-blue-2 focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-blue-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
             >
               Add to Cart
             </button>

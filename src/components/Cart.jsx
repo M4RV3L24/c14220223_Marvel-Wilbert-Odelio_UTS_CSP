@@ -1,4 +1,5 @@
 import { useCart } from '../context/CartContext';
+import ProductTitle from './ProductTitle';
 
 const Cart = () => {
   const { cartItems, removeFromCart } = useCart();
@@ -13,7 +14,7 @@ const Cart = () => {
           {cartItems.map((item) => (
             <div key={item.id} className="bg-white rounded-lg shadow-md p-4 flex flex-col h-full">
               <img src={item.image} alt={item.title} className="w-full h-48 object-contain mb-4" />
-              <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+              <ProductTitle product={item} />
               <p className="text-lg mb-2">Quantity: {item.quantity}</p>
               <p className="text-xl font-bold text-green-600 mb-4">Total: ${(item.price * item.quantity).toFixed(2)}</p>
               <button 
