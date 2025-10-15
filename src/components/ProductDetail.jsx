@@ -32,6 +32,7 @@ const ProductDetail = () => {
             <p className="text-gray-600 mb-4">{product.description}</p>
             <p className="text-lg mb-2"><span className="font-semibold">Category:</span> {product.category}</p>
             <p className="text-2xl font-bold text-green-600">${product.price}</p>
+              
           </div>
         </div>
       </div>

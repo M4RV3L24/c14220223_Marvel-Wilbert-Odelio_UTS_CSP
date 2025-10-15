@@ -29,14 +29,17 @@ const Home = () => {
           <div key={product.id} className="bg-white rounded-lg shadow-md p-4 flex flex-col h-full">
             <img src={product.image} alt={product.title} className="w-full h-48 object-contain mb-4" />
             <ProductTitle product={product} />
-            <p className="text-xl font-bold text-green-600 mb-4">${product.price}</p>
-            <button 
-              onClick={() => addToCart(product)}
-              // className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mt-auto shadow-blue-3 transition duration-150 ease-in-out"
-              className="inline-block rounded bg-blue px-6 pb-2 pt-2.5 mt-auto text-xs font-medium uppercase leading-normal text-white bg-blue-500 shadow-blue-3 transition duration-150 ease-in-out hover:bg-blue-accent-300 hover:shadow-blue-2 focus:bg-blue-accent-300 focus:shadow-blue-2 focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-blue-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-            >
-              Add to Cart
-            </button>
+            <div className='flex justify-between items-center mt-auto pt-3'>
+              <p className="text-md font-bold text-white bg-green-600 px-4 py-1.5 rounded-xl">${product.price}</p>
+              <button
+                onClick={() => addToCart(product)}
+                // className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mt-auto shadow-blue-3 transition duration-150 ease-in-out"
+                className="inline-block rounded-xl bg-blue px-6 ml-3 pb-2 pt-2.5 w-full text-xs font-medium uppercase leading-normal text-white bg-blue-500 shadow-blue-3 transition duration-150 ease-in-out hover:bg-blue-accent-300 hover:shadow-blue-2 focus:bg-blue-accent-300 focus:shadow-blue-2 focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-blue-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+              >
+                Add to Cart
+              </button>
+            </div>
+
           </div>
         ))}
       </div>
