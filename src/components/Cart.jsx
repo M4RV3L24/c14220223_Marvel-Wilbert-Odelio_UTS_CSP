@@ -15,14 +15,20 @@ const Cart = () => {
             <div key={item.id} className="bg-white rounded-lg shadow-md p-4 flex flex-col h-full">
               <img src={item.image} alt={item.title} className="w-full h-48 object-contain mb-4" />
               <ProductTitle product={item} />
-              <p className="text-lg mb-2">Quantity: {item.quantity}</p>
-              <p className="text-xl font-bold text-green-600 mb-4">Total: ${(item.price * item.quantity).toFixed(2)}</p>
-              <button 
-                onClick={() => removeFromCart(item.id)}
-                className="w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 mt-auto"
-              >
-                Remove from Cart
-              </button>
+              <div className="mt-auto">
+                <div className='flex justify-start items-center mt-auto mb-2 pt-3'>
+                  <p className="text-md font-semibold text-black bg-amber-200 px-4 py-1.5 rounded-xl">Quantity: {item.quantity}</p>
+                  <p className="text-md font-bold ms-2 text-amber-50 bg-green-600 px-4 py-1.5 rounded-xl">Total: ${(item.price * item.quantity).toFixed(2)}</p>
+                </div>
+                <button
+                  onClick={() => removeFromCart(item.id)}
+                  className="w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 mt-auto"
+                >
+                  Remove from Cart
+                </button>
+
+              </div>
+
             </div>
           ))}
         </div>
